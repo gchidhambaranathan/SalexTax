@@ -1,0 +1,180 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "com.problem.salestax.test.ProductTaxCalculatorTest",
+  "extensionCallbackMethod": ".png" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_309542241 { 
+   	label=problem
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_151715214 { 
+   	label=salestax
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   BasicSalesTax98274725[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)BasicSalesTax</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   exemptedProducts: List&lt;ProductType&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ isApplicable(product: Product): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ rate(): float</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ImportDutySalesTax98274725[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ImportDutySalesTax</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ isApplicable(product: Product): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ rate(): float</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Product98274725[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Product</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   isImported: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   name: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   price: float [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   productType: ProductType [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ name(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ price(): float</TD></TR>
+<TR><TD ALIGN="LEFT" >+ productType(): ProductType</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ProductTaxCalculator98274725[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ProductTaxCalculator</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ calculateItemCost(receiptItem: ReceiptItem)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ProductTaxCalculatorTest489010107[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ProductTaxCalculatorTest</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ is_Able_To_Calculate_Tax_TotalCost_For_Imported_Item()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ is_Able_To_Calculate_Tax_TotalCost_For_Mixed_Item()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ is_Able_To_Calculate_Tax_TotalCost_For_Non_Imported_Item()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+} 
+
+'edges    
+BasicSalesTax98274725 -> Product98274725[label="isApplicable() -> productType()"];
+ProductTaxCalculator98274725 -> BasicSalesTax98274725[arrowhead=none];
+ProductTaxCalculator98274725 -> ImportDutySalesTax98274725[arrowhead=none];
+ProductTaxCalculator98274725 -> Product98274725[label="calculate() -> price()", arrowhead=none];
+    
+}
+@enduml
